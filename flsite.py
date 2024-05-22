@@ -1,7 +1,9 @@
 import pickle
 
 import numpy as np
+import pandas as pd
 from flask import Flask, render_template, url_for, request, jsonify
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
 
 app = Flask(__name__)
 
@@ -81,8 +83,15 @@ def f_lab1():
         X_new = np.array([[float(request.form['list1']),
                            float(request.form['list2']),]])
         pred = loaded_model_lin_reg.predict(X_new)
+
+        dataset = pd.read_csv('model/Student_Marks.csv')
+        y_true = [dataset['Marks'][21]]
+        mse = mean_squared_error(y_true, pred)
+        mspe = mean_absolute_percentage_error(y_true, pred)
+        mape = np.mean(np.abs((y_true - pred) / y_true)) * 100
+
         return render_template('lab1.html', title="Линейная регрессия", menu=menu,
-                               class_model=round(pred[0][0], 2))
+                               class_model=round(pred[0][0], 2), mse=mse, mspe=mspe, mape=mape)
 
 @app.route("/p_lab2", methods=['POST', 'GET'])
 def f_lab2():
