@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+{{ super() }}
+<p>Логистическая регрессия
+    <form action="/p_lab2" method="POST">
+    <p><input name="list1" class="form_text" type="text"> island (Biscoe - 0, Dream - 1, Torgersen - 2)</p>
+    <p><input name="list2" class="form_text" type="text"> bill length (mm)</p>
+    <p><input name="list3" class="form_text" type="text"> bill depth (mm)</p>
+    <p><input name="list4" class="form_text" type="text"> flipper length (mm)</p>
+    <p><input name="list5" class="form_text" type="text"> body mass (g)</p>
+    <p><input name="list6" class="form_text" type="text"> year (2007-2009)</p>
+    <input type="submit" class="form_btn" value="penguin species">
+    <h1>{{class_model}}</h1>
+    <p>MSE: 0.203</p>
+    <p>MSPE: 0.001</p>
+    <p>MAPE: 0.008</p>
+    </p>
+</form>
+{% endblock %}
